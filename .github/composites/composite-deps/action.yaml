@@ -1,0 +1,22 @@
+name: 'Install and Test Node App'
+description: 'Instala dependencias y ejecuta tests para una app Node.js'
+inputs:
+  node-version:
+    description: 'Versión de Node.js'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Install Dependencies
+      run: npm ci
+      shell: bash
+
+    - name: Run Unit Tests
+      run: npm test
+      shell: bash
